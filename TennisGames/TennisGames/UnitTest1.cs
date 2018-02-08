@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TennisGamesTest
 {
@@ -9,7 +10,7 @@ namespace TennisGamesTest
         public void Love_All()
         {
             var tennisGames = new TennisGames();
-            ScoreShouldBe("Love_All", tennisGames.Score());
+            ScoreShouldBe("Love All", tennisGames.Score());
         }
 
         [Test]
@@ -17,7 +18,16 @@ namespace TennisGamesTest
         {
             var tennisGames = new TennisGames();
             tennisGames.FirstPlayerScore();
-            ScoreShouldBe("Fifteen_Love", tennisGames.Score());
+            ScoreShouldBe("Fifteen Love", tennisGames.Score());
+        }
+
+        [Test]
+        public void Thirty_Love()
+        {
+            var tennisGames = new TennisGames();
+            tennisGames.FirstPlayerScore();
+            tennisGames.FirstPlayerScore();
+            ScoreShouldBe("Thirty Love", tennisGames.Score());
         }
 
         private void ScoreShouldBe(string expected, string actual)
@@ -28,14 +38,21 @@ namespace TennisGamesTest
 
     public class TennisGames
     {
+        private Dictionary<int, string> ScoreLookup = new Dictionary<int, string>()
+        {
+            {0,"Love" },
+            {1,"Fifteen" },
+            {2,"Thirty" }
+        };
+
         public string Score()
         {
-            if (FirstPlayerScoreTimes == 1)
+            if (FirstPlayerScoreTimes > 0)
             {
-                return "Fifteen_Love";
+                return $"{ScoreLookup[FirstPlayerScoreTimes]} Love";
             }
 
-            return "Love_All";
+            return "Love All";
         }
 
         public void FirstPlayerScore()
