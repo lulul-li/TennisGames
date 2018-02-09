@@ -32,9 +32,10 @@ namespace TennisGames
         {
             if (FirstPlayerScoreTimes != SecondPlayerScoreTimes)
             {
-                if (FirstPlayerScoreTimes > 3)
+                if (FirstPlayerScoreTimes > 3||SecondPlayerScoreTimes>3)
                 {
-                    return $"{FirstPlayerName} Adv";
+                    var winer = FirstPlayerScoreTimes > SecondPlayerScoreTimes ? FirstPlayerName : SecondPlayerName;
+                    return $"{winer} Adv";
                 }
                 return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondPlayerScoreTimes]}";
             }

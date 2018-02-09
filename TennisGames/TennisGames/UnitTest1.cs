@@ -87,6 +87,14 @@ namespace TennisGamesTest
             ScoreShouldBe("Lulu Adv");
         }
 
+        [Test]
+        public void SecondPlayer_Advantage()
+        {
+            FirstPlayerScoreTimes(_tennisGames, 3);
+            SecondPlayerScoreTimes(_tennisGames, 4);
+            ScoreShouldBe("Ruru Adv");
+        }
+
         private static void FirstPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
         {
             for (var i = 0; i < times; i++)
