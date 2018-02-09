@@ -17,7 +17,8 @@ namespace TennisGamesTest
         public void Fifteen_Love()
         {
             var tennisGames = new TennisGames();
-            tennisGames.FirstPlayerScore();
+
+            FirstPlayerScoreTimes(tennisGames, 1);
             ScoreShouldBe("Fifteen Love", tennisGames.Score());
         }
 
@@ -25,9 +26,24 @@ namespace TennisGamesTest
         public void Thirty_Love()
         {
             var tennisGames = new TennisGames();
-            tennisGames.FirstPlayerScore();
-            tennisGames.FirstPlayerScore();
+            FirstPlayerScoreTimes(tennisGames, 2);
             ScoreShouldBe("Thirty Love", tennisGames.Score());
+        }
+
+        [Test]
+        public void Forty_Love()
+        {
+            var tennisGames = new TennisGames();
+            FirstPlayerScoreTimes(tennisGames, 3);
+            ScoreShouldBe("Forty Love", tennisGames.Score());
+        }
+
+        private static void FirstPlayerScoreTimes(TennisGames tennisGames, int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                tennisGames.FirstPlayerScore();
+            }
         }
 
         private void ScoreShouldBe(string expected, string actual)
@@ -42,7 +58,8 @@ namespace TennisGamesTest
         {
             {0,"Love" },
             {1,"Fifteen" },
-            {2,"Thirty" }
+            {2,"Thirty" },
+            {3,"Forty" }
         };
 
         public string Score()
