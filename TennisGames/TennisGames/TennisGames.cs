@@ -31,24 +31,41 @@ namespace TennisGames
 
         public string Score()
         {
-            if (FirstPlayerScoreTimes != SecondPlayerScoreTimes)
+            if (DiffScore())
             {
-                if (FirstPlayerScoreTimes > 3||SecondPlayerScoreTimes>3)
+                if (ReadyWin())
                 {
-                    if (Math.Abs(FirstPlayerScoreTimes - SecondPlayerScoreTimes) > 1)
-                    {
-                        return $"{Winer()} Win";
-                    }
-                    return $"{Winer()} Adv";
+                    return IsWin() ? $"{Winer()} Win" : $"{Winer()} Adv";
                 }
-                return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondPlayerScoreTimes]}";
-            }
-            if (FirstPlayerScoreTimes >= 3)
-            {
-                return "Deuce";
+                return NormalScore();
             }
 
-            return $"{ScoreLookup[FirstPlayerScoreTimes]} All";
+            return Deuce() ? "Deuce" : $"{ScoreLookup[FirstPlayerScoreTimes]} All";
+        }
+
+        private string NormalScore()
+        {
+            return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondPlayerScoreTimes]}";
+        }
+
+        private bool DiffScore()
+        {
+            return FirstPlayerScoreTimes != SecondPlayerScoreTimes;
+        }
+
+        private bool Deuce()
+        {
+            return FirstPlayerScoreTimes >= 3;
+        }
+
+        private bool ReadyWin()
+        {
+            return FirstPlayerScoreTimes > 3||SecondPlayerScoreTimes>3;
+        }
+
+        private bool IsWin()
+        {
+            return Math.Abs(FirstPlayerScoreTimes - SecondPlayerScoreTimes) > 1;
         }
 
         private string Winer()
