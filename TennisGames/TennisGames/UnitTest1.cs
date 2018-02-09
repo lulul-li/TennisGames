@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace TennisGamesTest
 {
@@ -9,36 +8,22 @@ namespace TennisGamesTest
         [Test]
         public void Love_All()
         {
-            var tennisGames = new TennisGames();
+            var tennisGames = new TennisGames.TennisGames();
             ScoreShouldBe("Love All", tennisGames.Score());
-        }
-
-        [Test]
-        public void Fifteen_Love()
-        {
-            var tennisGames = new TennisGames();
-
-            FirstPlayerScoreTimes(tennisGames, 1);
-            ScoreShouldBe("Fifteen Love", tennisGames.Score());
         }
 
         [Test]
         public void Love_Fifteen()
         {
-            var tennisGames = new TennisGames();
+            var tennisGames = new TennisGames.TennisGames();
             SecondPlayerScoreTimes(tennisGames, 1);
             ScoreShouldBe("Love Fifteen", tennisGames.Score());
-        }
-
-        private void SecondPlayerScoreTimes(TennisGames tennisGames, int i)
-        {
-            tennisGames.SecondPlayerScore();
         }
 
         [Test]
         public void Thirty_Love()
         {
-            var tennisGames = new TennisGames();
+            var tennisGames = new TennisGames.TennisGames();
             FirstPlayerScoreTimes(tennisGames, 2);
             ScoreShouldBe("Thirty Love", tennisGames.Score());
         }
@@ -46,16 +31,53 @@ namespace TennisGamesTest
         [Test]
         public void Forty_Love()
         {
-            var tennisGames = new TennisGames();
+            var tennisGames = new TennisGames.TennisGames();
             FirstPlayerScoreTimes(tennisGames, 3);
             ScoreShouldBe("Forty Love", tennisGames.Score());
         }
 
-        private static void FirstPlayerScoreTimes(TennisGames tennisGames, int times)
+        [Test]
+        public void Fifteen_Love()
         {
-            for (int i = 0; i < times; i++)
+            var tennisGames = new TennisGames.TennisGames();
+
+            FirstPlayerScoreTimes(tennisGames, 1);
+            ScoreShouldBe("Fifteen Love", tennisGames.Score());
+        }
+
+        [Test]
+        public void Fifteen_All()
+        {
+            var tennisGames = new TennisGames.TennisGames();
+
+            FirstPlayerScoreTimes(tennisGames, 1);
+            SecondPlayerScoreTimes(tennisGames, 1);
+            ScoreShouldBe("Fifteen All", tennisGames.Score());
+        }
+
+        [Test]
+        public void Thirty_All()
+        {
+            var tennisGames = new TennisGames.TennisGames();
+
+            FirstPlayerScoreTimes(tennisGames, 2);
+            SecondPlayerScoreTimes(tennisGames, 2);
+            ScoreShouldBe("Thirty All", tennisGames.Score());
+        }
+
+        private static void FirstPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
+        {
+            for (var i = 0; i < times; i++)
             {
                 tennisGames.FirstPlayerScore();
+            }
+        }
+
+        private void SecondPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
+        {
+            for (int j = 0; j < times; j++)
+            {
+                tennisGames.SecondPlayerScore();
             }
         }
 
@@ -63,40 +85,5 @@ namespace TennisGamesTest
         {
             Assert.AreEqual(expected, actual);
         }
-    }
-
-    public class TennisGames
-    {
-        private Dictionary<int, string> ScoreLookup = new Dictionary<int, string>()
-        {
-            {0,"Love" },
-            {1,"Fifteen" },
-            {2,"Thirty" },
-            {3,"Forty" }
-        };
-
-        public string Score()
-        {
-            if (FirstPlayerScoreTimes > 0 || SecondScoreTimes > 0)
-            {
-                return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondScoreTimes]}";
-            }
-
-            return "Love All";
-        }
-
-        public void FirstPlayerScore()
-        {
-            FirstPlayerScoreTimes++;
-        }
-
-        public int FirstPlayerScoreTimes { get; set; }
-
-        public void SecondPlayerScore()
-        {
-            SecondScoreTimes++;
-        }
-
-        public int SecondScoreTimes { get; set; }
     }
 }
