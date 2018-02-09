@@ -64,6 +64,24 @@ namespace TennisGamesTest
             SecondPlayerScoreTimes(tennisGames, 2);
             ScoreShouldBe("Thirty All", tennisGames.Score());
         }
+        [Test]
+        public void Deuce_when_3_3()
+        {
+            var tennisGames = new TennisGames.TennisGames();
+
+            FirstPlayerScoreTimes(tennisGames, 3);
+            SecondPlayerScoreTimes(tennisGames, 3);
+            ScoreShouldBe("Deuce", tennisGames.Score());
+        }
+        [Test]
+        public void Deuce_when_4_4()
+        {
+            var tennisGames = new TennisGames.TennisGames();
+
+            FirstPlayerScoreTimes(tennisGames, 3);
+            SecondPlayerScoreTimes(tennisGames, 3);
+            ScoreShouldBe("Deuce", tennisGames.Score());
+        }
 
         private static void FirstPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
         {

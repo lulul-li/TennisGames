@@ -22,6 +22,10 @@ namespace TennisGames
             {
                 return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondPlayerScoreTimes]}";
             }
+            if (FirstPlayerScoreTimes >= 3)
+            {
+                return "Deuce";
+            }
 
             return $"{ScoreLookup[FirstPlayerScoreTimes]} All";
         }
