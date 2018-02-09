@@ -94,6 +94,20 @@ namespace TennisGamesTest
             SecondPlayerScoreTimes(_tennisGames, 4);
             ScoreShouldBe("Ruru Adv");
         }
+        [Test]
+        public void SecondPlayer_Win()
+        {
+            FirstPlayerScoreTimes(_tennisGames, 3);
+            SecondPlayerScoreTimes(_tennisGames, 5);
+            ScoreShouldBe("Ruru Win");
+        }
+        [Test]
+        public void FirstPlayer_Win()
+        {
+            FirstPlayerScoreTimes(_tennisGames, 5);
+            SecondPlayerScoreTimes(_tennisGames, 3);
+            ScoreShouldBe("Lulu Win");
+        }
 
         private static void FirstPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
         {
