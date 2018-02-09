@@ -23,6 +23,19 @@ namespace TennisGamesTest
         }
 
         [Test]
+        public void Love_Fifteen()
+        {
+            var tennisGames = new TennisGames();
+            SecondPlayerScoreTimes(tennisGames, 1);
+            ScoreShouldBe("Love Fifteen", tennisGames.Score());
+        }
+
+        private void SecondPlayerScoreTimes(TennisGames tennisGames, int i)
+        {
+            tennisGames.SecondPlayerScore();
+        }
+
+        [Test]
         public void Thirty_Love()
         {
             var tennisGames = new TennisGames();
@@ -64,9 +77,9 @@ namespace TennisGamesTest
 
         public string Score()
         {
-            if (FirstPlayerScoreTimes > 0)
+            if (FirstPlayerScoreTimes > 0 || SecondScoreTimes > 0)
             {
-                return $"{ScoreLookup[FirstPlayerScoreTimes]} Love";
+                return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondScoreTimes]}";
             }
 
             return "Love All";
@@ -78,5 +91,12 @@ namespace TennisGamesTest
         }
 
         public int FirstPlayerScoreTimes { get; set; }
+
+        public void SecondPlayerScore()
+        {
+            SecondScoreTimes++;
+        }
+
+        public int SecondScoreTimes { get; set; }
     }
 }
