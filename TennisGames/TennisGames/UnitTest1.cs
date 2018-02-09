@@ -5,82 +5,86 @@ namespace TennisGamesTest
     [TestFixture]
     public class UnitTest1
     {
+        private TennisGames.TennisGames _tennisGames;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _tennisGames = new TennisGames.TennisGames("Lulu", "Ruru"); ;
+        }
+
         [Test]
         public void Love_All()
         {
-            var tennisGames = new TennisGames.TennisGames();
-            ScoreShouldBe("Love All", tennisGames.Score());
+            ScoreShouldBe("Love All");
         }
 
         [Test]
         public void Love_Fifteen()
         {
-            var tennisGames = new TennisGames.TennisGames();
-            SecondPlayerScoreTimes(tennisGames, 1);
-            ScoreShouldBe("Love Fifteen", tennisGames.Score());
+            SecondPlayerScoreTimes(_tennisGames, 1);
+            ScoreShouldBe("Love Fifteen");
         }
 
         [Test]
         public void Thirty_Love()
         {
-            var tennisGames = new TennisGames.TennisGames();
-            FirstPlayerScoreTimes(tennisGames, 2);
-            ScoreShouldBe("Thirty Love", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 2);
+            ScoreShouldBe("Thirty Love");
         }
 
         [Test]
         public void Forty_Love()
         {
-            var tennisGames = new TennisGames.TennisGames();
-            FirstPlayerScoreTimes(tennisGames, 3);
-            ScoreShouldBe("Forty Love", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 3);
+            ScoreShouldBe("Forty Love");
         }
 
         [Test]
         public void Fifteen_Love()
         {
-            var tennisGames = new TennisGames.TennisGames();
-
-            FirstPlayerScoreTimes(tennisGames, 1);
-            ScoreShouldBe("Fifteen Love", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 1);
+            ScoreShouldBe("Fifteen Love");
         }
 
         [Test]
         public void Fifteen_All()
         {
-            var tennisGames = new TennisGames.TennisGames();
-
-            FirstPlayerScoreTimes(tennisGames, 1);
-            SecondPlayerScoreTimes(tennisGames, 1);
-            ScoreShouldBe("Fifteen All", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 1);
+            SecondPlayerScoreTimes(_tennisGames, 1);
+            ScoreShouldBe("Fifteen All");
         }
 
         [Test]
         public void Thirty_All()
         {
-            var tennisGames = new TennisGames.TennisGames();
-
-            FirstPlayerScoreTimes(tennisGames, 2);
-            SecondPlayerScoreTimes(tennisGames, 2);
-            ScoreShouldBe("Thirty All", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 2);
+            SecondPlayerScoreTimes(_tennisGames, 2);
+            ScoreShouldBe("Thirty All");
         }
+
         [Test]
         public void Deuce_when_3_3()
         {
-            var tennisGames = new TennisGames.TennisGames();
-
-            FirstPlayerScoreTimes(tennisGames, 3);
-            SecondPlayerScoreTimes(tennisGames, 3);
-            ScoreShouldBe("Deuce", tennisGames.Score());
+            FirstPlayerScoreTimes(_tennisGames, 3);
+            SecondPlayerScoreTimes(_tennisGames, 3);
+            ScoreShouldBe("Deuce");
         }
+
         [Test]
         public void Deuce_when_4_4()
         {
-            var tennisGames = new TennisGames.TennisGames();
+            FirstPlayerScoreTimes(_tennisGames, 4);
+            SecondPlayerScoreTimes(_tennisGames, 4);
+            ScoreShouldBe("Deuce");
+        }
 
-            FirstPlayerScoreTimes(tennisGames, 3);
-            SecondPlayerScoreTimes(tennisGames, 3);
-            ScoreShouldBe("Deuce", tennisGames.Score());
+        [Test]
+        public void FirstPlayer_Advantage()
+        {
+            FirstPlayerScoreTimes(_tennisGames, 4);
+            SecondPlayerScoreTimes(_tennisGames, 3);
+            ScoreShouldBe("Lulu Adv");
         }
 
         private static void FirstPlayerScoreTimes(TennisGames.TennisGames tennisGames, int times)
@@ -99,9 +103,9 @@ namespace TennisGamesTest
             }
         }
 
-        private void ScoreShouldBe(string expected, string actual)
+        private void ScoreShouldBe(string expected)
         {
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, _tennisGames.Score());
         }
     }
 }

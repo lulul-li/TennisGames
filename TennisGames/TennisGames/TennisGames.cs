@@ -8,6 +8,10 @@ namespace TennisGames
 
         public int SecondPlayerScoreTimes { get; set; }
 
+        public string SecondPlayerName { get; set; }
+
+        public string FirstPlayerName { get; set; }
+
         private Dictionary<int, string> ScoreLookup = new Dictionary<int, string>()
         {
             {0,"Love" },
@@ -16,10 +20,22 @@ namespace TennisGames
             {3,"Forty" }
         };
 
+
+        public TennisGames(string firstPlayerName, string secondPlayerName)
+        {
+
+            FirstPlayerName = firstPlayerName;
+            SecondPlayerName = secondPlayerName;
+        }
+
         public string Score()
         {
             if (FirstPlayerScoreTimes != SecondPlayerScoreTimes)
             {
+                if (FirstPlayerScoreTimes > 3)
+                {
+                    return $"{FirstPlayerName} Adv";
+                }
                 return $"{ScoreLookup[FirstPlayerScoreTimes]} {ScoreLookup[SecondPlayerScoreTimes]}";
             }
             if (FirstPlayerScoreTimes >= 3)
